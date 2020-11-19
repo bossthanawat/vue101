@@ -16,18 +16,52 @@
 :::
 
 ## data
-
+คือค่า variable ที่เราสามารถนำไปใช้
 ```javascript
 <script>
   export default {
     data() {
       return {
-        brandname: 'payoo',
-        lastname: 'pawin',
-        age: 30,
-        colors: ['red', 'gree', 'blug']
+        brand: 'nikon',
+        series: 'Z',
+        price: 300,
+        colors: ['red', 'gree', 'yellow']
       }
     }
   }
 </script>
 ```
+เราสามารถใช้ ```{{}}``` สำหรับการนำ data variable ไปใส่ได้ 
+
+```html
+<template>
+  <div>
+    <p>brand: {{ brand }}</p>
+    <p>series: {{ series }}</p>
+    <p>price: {{ price }}</p>
+    <p>colors: {{ colors }}</p>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        brand: 'nikon',
+        series: 'Z',
+        price: 300,
+        colors: ['red', 'gree', 'yellow']
+    }
+  }
+}
+</script>
+```
+แสดงผล
+
+<ExampleShowdata/>
+
+
+::: tip 
+ภายใต้ ```{{}}```สามารถเขียนพวก check true false แบบง่ายๆ เช่น {{ ```price > 300 ?'แพงจัง':'ถูกมาก'``` }}
+:::
+
