@@ -1,4 +1,4 @@
-# Vue Instance (Basic)
+# Vue Instance (Basic) API 2.x
 
 *ขอบคุณข้อมูลส่วนใหญ่จาก https://www.khomkrit.com/self-studying-vuejs-in-30-minutes/#methods [khomkrit](https://www.khomkrit.com/self-studying-vuejs-in-30-minutes/#methods)
 [The Vue Instance](https://vuejs.org/v2/guide/instance.html)*
@@ -230,3 +230,150 @@
 
 <p>Header Word!</p>
 <p>Content Word!</p>
+
+## Props
+
+เราสามารถเขียนรับค่าบางสิ่งเข้าไปใน component เพื่อนำมาใช้ได้โดยใช้ Props
+
+เพิ่มให้ ```HeaderWord.vue``` สามารถรับค่าได้ 
+
+```html
+<!-- file headerWord.vue -->
+<template>
+  <div>
+    <p>{{msg}}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['msg'],
+  ...
+}
+</script>
+```
+
+โดยให้ ```contentWord.vue``` เป็นคนส่งค่าให้
+
+```html
+<!-- file contentWord.vue -->
+<template>
+  <div>
+    <header-word msg="Props Word!"></header-word> 
+    <p>Content Word!</p>
+    ...
+  </div>
+</template>
+```
+
+แสดงผล ของไฟล์ ```contentWord.vue```
+
+<p>Props Word!</p>
+<p>Content Word!</p>
+
+> ยังมีวิธีเขียน Props อีกหลายแบบอ่านเพิ่มเติมที่ [Props](https://vuejs.org/v2/guide/components-props.html)
+
+## Slot
+ใช้ ```<slot></slot>``` เพื่อใช้เป็นช่องทางการแจกจ่ายสำหรับเนื้อหา
+
+ยังมี Slot อีกหลายแบบอ่านเพิ่มเติมได้ที่ [Slot](https://vuejs.org/v2/guide/components-slots.html)
+
+เพิ่ม slot ใน ```headerWord.vue```
+
+```html
+<!-- file headerWord.vue -->
+<template>
+  <div>
+    <slot></slot>
+    <p>{{msg}}</p>
+  </div>
+</template>
+```
+ใน ```contentWord.vue``` ลองเขียน tag ภายใต้ tag ```header-word```
+```html
+<!-- file contentWord.vue -->
+<template>
+  <div>
+    <header-word msg="Props Word!">
+      <p>Slot Word!<p>
+    </header-word> 
+    <p>Content Word!</p>
+    ...
+  </div>
+</template>
+```
+แสดงผล ของไฟล์ ```contentWord.vue```
+
+<p>Slot Word!</p>
+<p>Props Word!</p>
+<p>Content Word!</p>
+
+## Emit
+
+เป็นการส่งค่าออกจาก component
+
+ตัวอย่างจาก [khomkrit](https://www.khomkrit.com/self-studying-vuejs-in-30-minutes/#Directive)
+```html
+<!-- file Create.vue -->
+<template>
+  <form @submit.prevent="saveColor"> <!-- submit แล้วจะเรียก saveColor-->
+    <div>
+      <label>Input new Color</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="input"
+        v-model="color"
+      />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      color: ''
+    }
+  },
+  methods: {
+    saveColor() {
+      this.$emit('createColor', this.color) // ประกาศ emit event ชื่อ 'createColor' ที่ส่งค่า color
+    }
+  }
+}
+</script>
+```
+
+```html
+<template>
+  <div>
+    <app-create @createColor="addColor"></app-create>
+     <!-- ใช้ v-on รับ 'createColor' event emit ที่ประกาศไว้ในตัว AppCreate และต้องรับด้วย methods เท่านั้น -->
+     {{colors}}
+  </div>
+</template>
+<script>
+  import Create from './Create.vue'
+  export default {
+    data() { 
+      return {
+        colors:[]
+      }
+    },
+    methods: {
+      addColor(color) {
+        this.colors.push(color) 
+        // ค่าของ color คือ this.color จาก AppCreate ที่ส่งมา
+        // มันก็เหมือนกับเขียนรับ event @click @input เพียงแต่อันนี้เราเขียน event เอง ตั้งชื่อเอง return ค่าเอง
+      }
+    },
+    components: {
+      AppCreate: Create
+    }
+  }
+</script>
+```
+
+แสดงผล
+<ExampleEmit-ContentColor/>
