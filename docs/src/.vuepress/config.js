@@ -38,10 +38,11 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'Documentation',
+        text: '101',
         link: '/documentation/'
       }
     ],
+    sidebarDepth:2,
     sidebar: {
       '/guide/': [
         {
@@ -56,13 +57,13 @@ module.exports = {
       ],
       '/documentation/': [
         {
-          title: 'Documentation',
+          title: '101',
           collapsable: false,
           children: [
-            '',
             'instant-prototype',
             'getting-started',
-            'vue-instance'
+            'vue-instance',
+            'directive'
           ]
         }
       ],
