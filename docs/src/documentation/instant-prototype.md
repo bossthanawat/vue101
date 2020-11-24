@@ -53,6 +53,13 @@
 <style>
 ```
 
+<p class="codepen" data-height="400" data-theme-id="dark" data-default-tab="js,result" data-user="thanawat" data-slug-hash="BazXeoe" style="height: 400px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="vue101">
+  <span>See the Pen <a href="https://codepen.io/thanawat/pen/BazXeoe">
+  vue101</a> by thanawat (<a href="https://codepen.io/thanawat">@thanawat</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## vue serve
 คุณสามารถสร้างต้นแบบได้อย่างรวดเร็วด้วยไฟล์ ```*.vue``` แล้ว run โดยใช้คำสั่งvue serve 
 

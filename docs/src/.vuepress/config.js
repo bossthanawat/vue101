@@ -39,7 +39,11 @@ module.exports = {
       },
       {
         text: '101',
-        link: '/documentation/'
+        link: '/documentation/instant-prototype'
+      },
+      {
+        text: 'Vue',
+        link: 'https://vuejs.org/v2/guide/'
       }
     ],
     sidebarDepth:2,
