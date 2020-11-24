@@ -63,7 +63,8 @@ module.exports = {
             'instant-prototype',
             'getting-started',
             'vue-instance',
-            'directive'
+            'directive',
+            'vue-router'
           ]
         }
       ],
