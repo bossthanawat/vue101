@@ -165,15 +165,13 @@
 - beforeDestroy
 - destoryed
 
-อ่านเพิ่มเติมแต่ละ hook แบบภาษาไทย [Life Cycle คืออะไร ?](https://medium.com/@njth/%E0%B8%AB%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99-vue-js-%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%99%E0%B9%86-ep-2-90146f2343c9)
-
 ```html
 <script>
   export default {
     ...
     created() {
       console.log('created')
-      //Ex. get api เพื่อเอาข้อมูลมาใช้ หรือโชว์ จังหวะเริ่มสร้าง component นี้
+      //Ex. get api เพื่อเอาข้อมูลมาใช้หรือโชว์ ก่อนที่ component จะเริ่ม render
     },
     mounted() {
       console.log('mounted')
@@ -182,6 +180,16 @@
   }
 </script>
 ```
+
+<p class="codepen" data-height="481" data-theme-id="dark" data-default-tab="js,result" data-user="thanawat" data-slug-hash="PoGYKry" style="height: 481px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue lifecycle example">
+  <span>See the Pen <a href="https://codepen.io/thanawat/pen/PoGYKry">
+  Vue lifecycle example</a> by thanawat (<a href="https://codepen.io/thanawat">@thanawat</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+อ่านเพิ่มเติมแต่ละ hook แบบภาษาไทย [Life Cycle คืออะไร ?](https://medium.com/@njth/%E0%B8%AB%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99-vue-js-%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%99%E0%B9%86-ep-2-90146f2343c9)
 
 ## Components
 
