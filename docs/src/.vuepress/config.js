@@ -69,7 +69,8 @@ module.exports = {
             'vue-instance',
             'directive',
             'vue-router',
-            'vuex'
+            'vuex',
+            'style'
           ]
         }
       ],
