@@ -242,5 +242,187 @@ actions: {
 
 
 ### Getters
+
+ถ้าเราต้องการคำนวนค่าของ state ก่อนนำออกมาใช้งาน เราจะไม่อ้างไปถึง state ตรงๆแต่จะใช้ผ่าน Getters แทน
+
+```js
+getters: {
+  // นับว่า items มีกี่อันแล้ว
+  todoCount(state) {
+    return state.items.length
+  }
+}
+```
+
+ตอนเรียกใช้ใน App
+
+```js
+let itemCounts = this.$store.getters.todoCount
+```
+
+#### The mapActions Helper
+สามารถใช้ ```mapGetters``` แทน ```this.$store.getters```
+
+```js
+export default {
+  computed: {
+    ...mapGetters({
+      todoCount: 'todoCount'
+    })
+  }
+}
+```
+
+### Example
+
+ภาพรวมจากตัวอย่างที่กล่าวมาก่อนหน้า
+
+```html
+<template>
+  <p>items : {{ items }}</p>
+  <p>item count : {{ todoCount }}</p>
+  <button @click="addTodo">Add bee</button>
+</template>
+
+<script>
+import { mapState, mapActions, mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapState({
+      items : state => state.items
+    }),
+    ...mapGetters({
+      todoCount: 'todoCount'
+    })
+  },
+  methods: {
+    ...mapActions({
+      addItem: 'addItem'
+    }),
+    addTodo() {
+      this.addItem({item: 'bee'})
+    }
+  }
+}
+</script>
+```
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    items: ['foo','bar']
+  },
+  mutations: {
+    ADD_ITEM (state, payload) {
+      state.items.push(payload.item)
+    }
+  },
+  actions: {
+    addItem({ commit }, payload) {
+      commit('ADD_ITEM', payload)
+    }
+  },
+  getters: {
+    todoCount(state) {
+      return state.items.length
+    }
+  }
+})
+```
+ตัวอย่างให้เห็นภาพการใช้ระหว่าง mutations กับ actions ให้เห็นภาพมากขึ้น
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    data:[]
+    loading: false
+    error:null
+  },
+  mutations: {
+    REQUEST(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    SUCCESS(state, payload) {
+      state.data = payload;
+      state.loading = false;
+      state.error = null;
+    },
+    FAILURE(state, error) {
+      state.data = [];
+      state.loading = false;
+      state.error = error;
+    }
+  },
+  actions: {
+    inquiryA({ commit }, payload) {
+      commit('REQUEST')
+      return getAPI(payload.id)
+        .then((res)=>{
+          commit('SUCCESS',res)
+        })
+        .catch((error)=>{
+          commit('FAILURE',error)
+        })
+    },
+    inquiryB({ commit }, payload) {
+      commit('REQUEST')
+      return getAPI(payload.param)
+        .then((res)=>{
+          commit('SUCCESS',res)
+        })
+        .catch((error)=>{
+          commit('FAILURE',error)
+        })
+    }
+  },
+  getters: {
+    todoCount(state) {
+      return state.data.length
+    }
+  }
+})
+```
+
 ### Modules
 
+ในการใช้งานจริง เนื่องจากการใช้ single state tree สถานะทั้งหมดของแอปพลิเคชันจะอยู่ในวัตถุขนาดใหญ่ชิ้นเดียว
+
+เราสามารถแบ่งเป็น modulesย่อยๆได้ โดยที่ modulesสามารถมี state, mutations, actions, getter ของตัวเอง
+
+อ่านเพิ่มเติมได้ที่ [modules](https://vuex.vuejs.org/guide/modules.html)
+
+```js
+const moduleA = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
+
+const moduleB = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... }
+}
+
+const store = new Vuex.Store({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+
+//เวลาเรียกใช้ก็เพียงเรียกชื่อ module นำหน้าเพิ่มเติมเท่านั้นเอง
+store.state.a // -> `moduleA`'s state Ex. store.state.a.items
+store.state.b // -> `moduleB`'s state
+```
