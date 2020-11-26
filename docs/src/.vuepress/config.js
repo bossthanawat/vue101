@@ -68,7 +68,8 @@ module.exports = {
             'getting-started',
             'vue-instance',
             'directive',
-            'vue-router'
+            'vue-router',
+            'vscode-extensions'
           ]
         }
       ],
