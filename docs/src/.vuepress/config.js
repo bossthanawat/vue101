@@ -55,7 +55,8 @@ module.exports = {
           children: [
             '',
             'good-to-know',
-            'using-vue',  
+            'using-vue',
+            'vscode-extensions'
           ]
         }
       ],
@@ -70,8 +71,7 @@ module.exports = {
             'directive',
             'vue-router',
             'vuex',
-            'style',
-            'vscode-extensions'
+            'style'
           ]
         }
       ],
